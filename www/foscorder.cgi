@@ -29,6 +29,8 @@ sub play {
     while(<FH>) {
         print $_;
     }
+    
+    print multipart_final;
 }
 
 sub error {

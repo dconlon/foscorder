@@ -25,7 +25,7 @@ sub new {
     $self->{ua} = $ua;
     
     $self->{file_size} ||= (1024 * 1024 * 10);
-    
+        
     return $self;
 }
 
@@ -80,12 +80,11 @@ sub data {
             
     if ($self->{bytes_written} > $self->{file_size}) {
         # Once file size is reached, finish this file at end of next JPEG
-        #my ($end, $start) = split("--ipcamera", $data);
-        #warn $end && $start;
-        #if ($end && $start) {
-            print $fh $data;
+        my ($end, $start) = split(/--ipcam/, $data);
+        if ($end && $start) {
+            print $fh $end;
             croak "file_size reached";
-        #}
+        }
     }
     
     print $fh $data;
